@@ -1,12 +1,12 @@
 <resources>
-   <string name="app_name">Booking App</string>
+    <string name="app_name">Booking App</string>
     <string name="Login">Log In!</string>
     <string name="studentIDLabel">Student ID</string>
     <string name="password">Password</string>
 
 
     <string name="dateLabel">Date</string>
-    <string name="locationLabel">Current Location</string>
+    <string name="locationLabel">Choose Location</string>
     <string name="numPaxLabel">Number of Pax</string>
     <string name="starttime">Start Time/End Time</string>
     <string name="Title">SUTD Room Booking Portal</string>
@@ -39,7 +39,11 @@
         <item>10 pm</item>
         <item>11 pm</item>
         <item>12 am</item>
+    </string-array>
 
-
+    <string-array name="Locations">
+        <item>Blk 55</item>
+        <item>Blk 57</item>
+        <item>Blk 59</item>
     </string-array>
 </resources>
