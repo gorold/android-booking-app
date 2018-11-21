@@ -35,22 +35,23 @@ public class bookingScreen extends AppCompatActivity implements DatePickerDialog
             }
         });
 
-        Button bookButton = (Button) findViewById(R.id.bookButton);
-        bookButton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                Toast booked = Toast.makeText(getApplicationContext(),"Room has been booked!",Toast.LENGTH_LONG);
-                booked.show();
-            }
-        });
-
         Button button = (Button) findViewById(R.id.datePicker); //assign the button
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getSupportFragmentManager(), "date picker");
+            }
+        });
+
+
+        Button bookButton = (Button) findViewById(R.id.bookButton);     //Book Room after all settings has been set
+        bookButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Toast booked = Toast.makeText(getApplicationContext(),"Room has been booked!",Toast.LENGTH_LONG);
+                booked.show();
             }
         });
     }
@@ -83,6 +84,7 @@ public class bookingScreen extends AppCompatActivity implements DatePickerDialog
 
         //startActivity(intent);
     }
+
 
 }
 

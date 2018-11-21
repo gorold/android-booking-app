@@ -21,6 +21,9 @@
             android:name=".checkList"
             android:theme="@style/setLocationTheme" />
         <activity android:name=".setLocation2" />
+        <activity android:name=".mainScreen" />
+        <activity android:name=".viewBooking" />
+        <activity android:name=".bookingCard"></activity>
     </application>
 
 </manifest>

@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logIn(View view) {
-        startActivity(new Intent(this,bookingScreen.class));
+        startActivity(new Intent(this,mainScreen.class));
     }
 
 }
