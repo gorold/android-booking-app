@@ -4,6 +4,8 @@
     <string name="studentIDLabel">Student ID</string>
     <string name="password">Password</string>
 
+    <string name="branchTest01">brTest01</string>
+
 
     <string name="dateLabel">Date</string>
     <string name="locationLabel">Choose Location</string>
