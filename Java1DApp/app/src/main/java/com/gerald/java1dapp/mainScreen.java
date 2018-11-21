@@ -1,9 +1,13 @@
 package com.gerald.java1dapp;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toolbar;
 
 public class mainScreen extends AppCompatActivity {
 
@@ -11,6 +15,10 @@ public class mainScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setTitle("Content Screen");
+
     }
 
     public void toLogInScreen(View view){
@@ -27,7 +35,5 @@ public class mainScreen extends AppCompatActivity {
     public void toViewBookingCard(View view){
         startActivity(new Intent(this, bookingCard.class));
     }
-
-
 
 }
