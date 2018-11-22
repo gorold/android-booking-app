@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/navigation_view_bookings"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/view_bookings"
+        app:showAsAction="collapseActionView"
+        />
+
+    <item
+        android:id="@+id/navigation_new_booking"
+        android:enabled="true"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/new_booking"
+        app:showAsAction="collapseActionView"
+        />
+
+    <item
+        android:id="@+id/navigation_view_tasks"
+        android:enabled="true"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/view_tasks"
+        app:showAsAction="collapseActionView"
+        />
+
+
+</menu>

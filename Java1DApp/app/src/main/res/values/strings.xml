@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SUTD Rooms</string>
+    <string name="view_bookings">View Bookings</string>
+    <string name="new_booking">New Booking</string>
+    <string name="view_tasks">View Tasks</string>
+
+</resources>
