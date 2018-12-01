@@ -7,24 +7,24 @@
     tools:context=".LoginActivity"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/enterStudentId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Student Id"
-        android:inputType="number"/>
+    <!--<EditText-->
+        <!--android:id="@+id/enterStudentId"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="Student Id"-->
+        <!--android:inputType="number"/>-->
 
-    <EditText
-        android:id="@+id/enterPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="Password"/>
+    <!--<EditText-->
+        <!--android:id="@+id/enterPassword"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textPassword"-->
+        <!--android:hint="Password"/>-->
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"/>
+    <!--<Button-->
+        <!--android:id="@+id/loginButton"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Login"/>-->
 
 </LinearLayout>

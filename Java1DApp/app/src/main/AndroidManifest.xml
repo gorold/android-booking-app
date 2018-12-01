@@ -16,9 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewBookingsActivity" />
+        <activity android:name=".ViewBookingsActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".NewBookingActivity" />
-        <activity android:name=".ViewTasksActivity"></activity>
+        <activity android:name=".ViewTasksActivity"
+            android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>
