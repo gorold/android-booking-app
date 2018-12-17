@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:card_view="http://schemas.android.com/tools"
-    tools:context=".ViewTasksActivity">
+    tools:context=".AvailableRoomsActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -19,12 +18,11 @@
         android:layout_alignParentTop="true" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/view_tasks_recycler_view"
+        android:id="@+id/available_rooms_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/my_toolbar"
         android:layout_above="@id/bottom_navigation"></android.support.v7.widget.RecyclerView>
-
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"

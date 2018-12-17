@@ -1,6 +1,7 @@
 package com.gerald.java1dapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -29,34 +31,33 @@ public class LoginActivity extends AppCompatActivity {
 
     int RC_SIGN_IN = 1;
     private FirebaseFirestore db;
+    private SharedPreferences mPreferences;
+    private static final String MY_ID = "myId";
+    private static final String MY_NAME = "myName";
+    private static final String TAG = "Wubadub";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        Button loginButton = findViewById(R.id.loginButton);
-//        EditText enterStudentId = findViewById(R.id.enterStudentId);
-//        EditText enterPassword = findViewById(R.id.enterPassword);
-//
-//        loginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(LoginActivity.this, ViewBookingsActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        mPreferences = getSharedPreferences("sharedPref", MODE_PRIVATE);
+        String myId = mPreferences.getString(MY_ID, "");
+
 
         List<AuthUI.IdpConfig> providers = Arrays.asList(
-                new AuthUI.IdpConfig.GoogleBuilder().build(),
                 new AuthUI.IdpConfig.EmailBuilder().build());
-
-        startActivityForResult(
-                AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(providers)
-                .build(), RC_SIGN_IN
-        );
+        if (myId != "") {
+            Intent intent = new Intent(LoginActivity.this, ViewBookingsActivity.class);
+            startActivity(intent);
+        } else {
+            startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setAvailableProviders(providers)
+                            .build(), RC_SIGN_IN
+            );
+        }
     }
 
     @Override
@@ -75,7 +76,14 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             QuerySnapshot querySnapshot = task.getResult();
                             String studentId = querySnapshot.getDocuments().get(0).getId();
-                            Log.d("wubwubwub", studentId);
+                            String studentName = querySnapshot.getDocuments().get(0).get("name").toString();
+                            mPreferences = getSharedPreferences("sharedPref", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = mPreferences.edit();
+                            editor.putString(MY_ID, studentId);
+                            editor.putString(MY_NAME, studentName);
+                            Log.d(TAG, "User's Student Id: " + studentId);
+                            Log.d(TAG, studentName);
+                            editor.apply();
                         }
                     }
                 });
@@ -87,4 +95,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
 }

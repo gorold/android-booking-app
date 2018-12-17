@@ -2,70 +2,62 @@ package com.gerald.java1dapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class ViewBookingsActivity extends AppCompatActivity {
 
     private String TAG = "Wubadub";
-    private FirebaseFirestore db;
-    private FirestoreRecyclerAdapter<ViewBookingsModel, ViewBookingsModelHolder> adapter;
+    private SharedPreferences mPreferences;
+    private static final String MY_ID = "myId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_bookings);
 
-        RecyclerView recyclerView = findViewById(R.id.view_bookings_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
-        db = FirebaseFirestore.getInstance();
-        Query query = db.collection("Bookings").whereEqualTo("booker", "1002029");
-        FirestoreRecyclerOptions<ViewBookingsModel> options = new FirestoreRecyclerOptions.Builder<ViewBookingsModel>()
-                .setQuery(query, ViewBookingsModel.class)
-                .build();
+        ViewPager viewPager = findViewById(R.id.view_bookings_view_pager);
+        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
 
-        adapter = new FirestoreRecyclerAdapter<ViewBookingsModel, ViewBookingsModelHolder>(options) {
-
-            Context context;
-
-            @Override
-            protected void onBindViewHolder(@NonNull ViewBookingsModelHolder holder, int position, @NonNull ViewBookingsModel model) {
-                holder.setBooker(model.getBooker());
-                holder.setRoomId(model.getRoomId());
-                holder.setStartTime(model.getStartTime());
-                holder.setEndTime(model.getEndTime());
-            }
-
-            @NonNull
-            @Override
-            public ViewBookingsModelHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                context = viewGroup.getContext();
-                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.view_tasks_card_layout, viewGroup, false);
-                return new ViewBookingsModelHolder(view);
-            }
-        };
-
-        recyclerView.setAdapter(adapter);
+        TabLayout tabLayout = findViewById(R.id.view_bookings_tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
-
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -86,45 +78,62 @@ public class ViewBookingsActivity extends AppCompatActivity {
         });
     }
 
-    public class ViewBookingsModelHolder extends RecyclerView.ViewHolder {
-        private View view;
+    public class ViewPagerAdapter extends FragmentPagerAdapter {
 
-        ViewBookingsModelHolder(View itemView) {
-            super(itemView);
-            view = itemView;
+        private Fragment[] childFragments;
+
+        public ViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+            childFragments = new Fragment[] {
+                    new CurrentBookings(),
+                    new PendingBookings(),
+                    new RejectedBookings()
+            };
         }
 
-        void setBooker(String booker) {
-            TextView textView = view.findViewById(R.id.booker);
-            textView.setText(booker);
+        @Override
+        public Fragment getItem(int i) {
+            return childFragments[i];
         }
 
-        void setRoomId(String roomId) {
-            TextView textView = view.findViewById(R.id.room_id);
-            textView.setText(roomId);
+        @Override
+        public int getCount() {
+            return childFragments.length;
         }
 
-        void setStartTime(Date startTime) {
-            TextView textView = view.findViewById(R.id.start_time);
-            textView.setText(startTime.toString());
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            String title = getItem(position).getClass().getName();
+            return title.subSequence(title.lastIndexOf(".") + 1, title.lastIndexOf("B"));
         }
-
-        void setEndTime(Date endTime) {
-            TextView textView = view.findViewById(R.id.end_time);
-            textView.setText(endTime.toString());
-        }
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        adapter.startListening();
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        if (adapter!=null) {
-            adapter.stopListening();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_logout) {
+            Toast.makeText(ViewBookingsActivity.this, "Goodbye!", Toast.LENGTH_LONG).show();
+            mPreferences = getSharedPreferences("sharedPref", MODE_PRIVATE);
+            SharedPreferences.Editor editor = mPreferences.edit();
+            editor.putString(MY_ID, "");
+            editor.apply();
+            Intent intent = new Intent(ViewBookingsActivity.this, LoginActivity.class);
+            startActivity(intent);
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 }

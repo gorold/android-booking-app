@@ -6,10 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".NewBookingActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="new booking!"/>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/white"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_alignParentTop="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/my_toolbar"
+        android:layout_above="@id/bottom_navigation"
+        android:orientation="vertical"
+        android:padding="12dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date:"
+            android:textColor="#000"
+            android:textSize="18sp"/>
+        <Button
+            android:id="@+id/pick_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pick a date" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="From:"
+            android:textColor="#000"
+            android:textSize="18sp"/>
+        <Button
+            android:id="@+id/start_time_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pick a time" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="To:"
+            android:textColor="#000"
+            android:textSize="18sp"/>
+        <Button
+            android:id="@+id/end_time_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pick a time" />-->
+        <Button
+            android:id="@+id/find_room"
+            android:text="Find a room!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select 2 more users to book this room:"
+            android:textColor="#000"
+            android:textSize="18sp"/>
+        <EditText
+            android:id="@+id/user_one"
+            android:hint="Student ID 1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+        <EditText
+            android:id="@+id/user_two"
+            android:hint="Student ID 2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+        <Button
+            android:id="@+id/book_button"
+            android:text="Book this room!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="#3B5991"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"/>
+
+    </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"

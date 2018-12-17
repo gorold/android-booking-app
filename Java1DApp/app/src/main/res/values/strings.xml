@@ -3,5 +3,20 @@
     <string name="view_bookings">View Bookings</string>
     <string name="new_booking">New Booking</string>
     <string name="view_tasks">View Tasks</string>
+    <string name="users">Users</string>
+    <string name="from_booker">From: %1$s</string>
+    <string name="start_time">Start time: %1$s</string>
+    <string name="end_time">End time: %1$s</string>
+    <string name="room_id">Room ID: %1$s</string>
+    <string name="set_date">%1$s, %2$s</string>
+    <string name="set_date_task">Date: %1$s, %2$s</string>
+    <string name="room_name_id">%1$s (%2$s)</string>
+    <string name="room_name_id_task">Location: %1$s (%2$s)</string>
+    <string name="start_end_time">%1$s - %2$s</string>
+    <string name="start_end_time_task">Timing: %1$s - %2$s</string>
+    <string name="pending_bookees">Pending: %1$s</string>
 
+    <string name="action_logout">Logout</string>
+    <string name="room_capacity">Room Capacity: %1$s</string>
+    <string name="room_type">Room Type: %1$s</string>
 </resources>

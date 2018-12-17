@@ -2,7 +2,6 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view='http://schemas.android.com/apk/res-auto'
-    android:id="@+id/view_tasks_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="4dp"
@@ -18,14 +17,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="12dp">
-            <TextView
-                android:id="@+id/booker_name"
-                android:text="Booker Name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:textSize="14sp"
-                android:layout_alignParentTop="true"/>
 
             <TextView
                 android:id="@+id/room_name"
@@ -54,9 +45,16 @@
                 android:textColor="#000"
                 android:textSize="14sp"
                 android:layout_below="@+id/booking_date"/>
+
+            <TextView
+                android:id="@+id/pending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pending: "
+                android:textColor="#000"
+                android:textSize="14sp"
+                android:layout_below="@+id/booking_date"/>
         </LinearLayout>
-
-
 
         <Button
             android:id="@+id/buttonOptions"
